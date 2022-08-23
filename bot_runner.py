@@ -1,9 +1,8 @@
 import os
-from re import I
 import requests
 from dotenv import load_dotenv
 from typing import Dict, List, Any
-from telegram.ext import ApplicationBuilder, CommandHandler, Updater
+from telegram.ext import ApplicationBuilder, CommandHandler
 from bot import commands
 from time import sleep
 
@@ -13,19 +12,25 @@ TOKEN: str = os.environ.get("TOKEN")
 BASE_URL: str = os.environ.get("BASE_URL")
 
 
+def start(bot, update):
+    chat_id = update.message.chat_id
+    bot.send_message(chat_id=chat_id, message="REEECCEEBA!")
+
+
 def main() -> None:
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler(["start", "help", "ajuda"], commands.start))
-    app.add_handler(CommandHandler("teste", commands.motivacional))
+    app.add_handler(CommandHandler("motivacional", commands.motivacional))
+    app.add_hander(CommandHandler("tame", commands.tame))
 
-    # app.run_polling()
-    app.run_webhook(
-        listen="0.0.0.0",
-        port="443",
-        url_path=TOKEN,
-        webhook_url=f"{BASE_URL}{TOKEN}/setWebhook",
-    )
+    app.run_polling()
+    # app.run_webhook(
+    #     listen="0.0.0.0",
+    #     port="443",
+    #     url_path=TOKEN,
+    #     webhook_url=f"{BASE_URL}{TOKEN}/setWebhook",
+    # )
     # app.run_polling()
 
 
@@ -63,14 +68,15 @@ def delete_messages_update(list_result: List[Dict[str, Any]]) -> None:
 
 
 if __name__ == "__main__":
-    while True:
-        while True:
-            result: requests.Response = requests.get(f"{BASE_URL}{TOKEN}/getUpdates")
-            print(result.json())
+    # while True:
+    #     while True:
+    #         result: requests.Response = requests.get(f"{BASE_URL}{TOKEN}/getUpdates")
+    #         print(result.json())
 
-            if result.status_code == 200:
-                message: Dict[str, Any] = result.json()["result"]
+    #         if result.status_code == 200:
+    #             message: Dict[str, Any] = result.json()["result"]
 
-                delete_messages_update(message)
+    #             delete_messages_update(message)
 
-            sleep(2)
+    #         sleep(2)
+    main()
