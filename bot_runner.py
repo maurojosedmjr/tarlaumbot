@@ -21,8 +21,8 @@ def main() -> None:
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler(["start", "help", "ajuda"], commands.start))
-    app.add_handler(CommandHandler("motivacional", commands.motivacional))
-    app.add_hander(CommandHandler("tame", commands.tame))
+    # app.add_handler(CommandHandler("motivacional", commands.motivacional))
+    app.add_handler(CommandHandler("4devs", commands.for_devs))
 
     app.run_polling()
     # app.run_webhook(
