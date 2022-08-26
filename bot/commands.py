@@ -15,7 +15,7 @@ async def get_fordevs(action: str, **kwargs) -> str:
     if "help" in action:
         return f"""
             Uso:
-                /4devs FunçãoDejada ListaDeParametrosExtra
+                /4devs FunçãoDesejada ListaDeParametrosExtra
             Exemplo:
                 /4devs cpf pontuacao:N
             
